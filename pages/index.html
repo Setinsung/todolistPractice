@@ -2,72 +2,105 @@
 <html lang="zh">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TodoList</title>
-    <link rel="stylesheet" href="./css/index.css">
-    <script src="./lib/jquery.js"></script>
-    <script src="./lib/axios.js"></script>
-    <script src="./js/index.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=embe">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TodoList</title>
+  <link rel="stylesheet" href="./font/iconfont.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <script src="./lib/jquery.js"></script>
+  <script src="./lib/axios.js"></script>
+  <script src="./js/index.js"></script>
 </head>
 
 <body>
-    <header>
-        <h2>TodoList</h2>
-    </header>
-    <section>
-        <!-- 插入区 -->
-        <div class="insert">
-            <h2>请插入</h2>
-            <ul>
-                <li>
-                    <div>
-                        <label for="content">要做的事:&nbsp;</label>
-                        <input type="text" id="content">
-                    </div>
-                    <div>
-                        <label for="deadline">截止日期:&nbsp;</label>
-                        <input type="text" id="deadline">
-                    </div>
-                </li>
-            </ul>
-        </div>
+  <header>
+    <h2><a href="index.html">TodoList</a></h2>
+  </header>
+  <section>
+    <div class="operation">
+      <h2>操作</h2>
+      <ul>
+        <li>
+          <div class="insert">
+            <i id="i-add" class="iconfont icon-tianjia"></i>
+            <div>
+              <label for="content">事件：</label>
+              <input type="text" id="content">
+            </div>
 
-        <!-- todo区 -->
-        <div class="todo">
-            <h2>进行中</h2>
-            <ul id="todo">
-                <!-- <li>
-                    <input type="text">
-                    <span>11月12日</span>
-                    <a href="javascript:;"></a>
-                </li>
-                <li>
-                    <span>睡觉</span>
-                    <span>11月22日</span>
-                    <a href="javascript:;"></a>
-                </li> -->
-            </ul>
-        </div>
+            <div>
+              <label for="deadline">日期：</label>
+              <input type="text" id="deadline">
+            </div>
+          </div>
+          <div class="find">
+            <div>
+              <i id="i-find" class="iconfont icon-chaxun"></i>
+              <label for="findtodo">搜索：</label>
+              <input type="text" id="findtodo">
+              <i id="i-find-X" class="iconfont icon-shanchu"></i>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
 
-        <!-- done区 -->
-        <div class="done">
-            <h2>已完成</h2>
-            <ul id="done">
-                <!-- <li>
-                    <span>吃饭</span>
-                    <span>11月12日</span>
-                    <a href="javascript:;"></a>
-                </li>
-                <li>
-                    <span>睡觉</span>
-                    <span>11月22日</span>
-                    <a href="javascript:;"></a>
-                </li> -->
-            </ul>
+    <!-- todo区 -->
+    <div class="todo">
+      <h2>事件</h2>
+      <ul id="todo">
+        <!-- <li>
+          <input type="text">
+          <span>11月12日</span>
+          <a href="javascript:;"></a>
+        </li>
+        <li>
+          <span>睡觉</span>
+          <span>11月22日</span>
+          <a href="javascript:;"></a>
+        </li> -->
+      </ul>
+    </div>
+
+    <!-- done区 -->
+    <div class="done">
+      <ul id="done">
+        <!-- <li>
+          <span>吃饭</span>
+          <span>11月12日</span>
+          <a href="javascript:;"></a>
+        </li>
+        <li>
+          <span>睡觉</span>
+          <span>11月22日</span>
+          <a href="javascript:;"></a>
+        </li> -->
+      </ul>
+    </div>
+
+  </section>
+  <!-- TODO: 增加搜索 -->
+  <!-- messageBox -->
+  <div class="mb-base mb-delete">
+    <div class="mb-inner">
+      <div class="mb-header">
+        <div class="mb-title">
+          <span>提示</span>
+          <a class="mb-icon-close" title="close" href="javascript:;"><i class="iconfont icon-close"></i></a>
         </div>
-    </section>
+      </div>
+      <div class="mb-content">
+        <i class="iconfont icon-warning"></i>
+        将永久删除该事件，是否继续？
+      </div>
+      <div class="mb-bns">
+        <a href="javascript:;" class="mb-close">关闭</a>
+        <a href="javascript:;" class="mb-confirm">确认</a>
+      </div>
+    </div>
+  </div>
+  <div class="mb-overlay"></div>
 </body>
 
 </html>

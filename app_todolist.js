@@ -10,7 +10,6 @@ const connection = mysql.createConnection({
   password: '654321',
   database: 'tododb'
 })
-
 connection.connect(err => {
   if (err) {
     console.error('failed to connect to database, error: ', err)
@@ -20,13 +19,18 @@ connection.connect(err => {
 
 const app = express()
 app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.static('./pages'))
 
 // 获取todo列表
 app.get('/todos', function (req, res) {
-  const { page = 0, size = 999 } = req.query
-  const sql = `select * from tb_todo limit ${page}, ${size}`
+  const { page = 0, size = 999, query = '' } = req.query
+  let sql = ''
+  if (query != '' && query != undefined) {
+    sql = `select * from tb_todo where content like '%${query}%' limit ${page}, ${size}`
+  } else {
+    sql = `select * from tb_todo limit ${page}, ${size}`
+  }
   connection.query(sql, (err, result) => {
     if (err) {
       return res.status(500).json({ msg: err })
@@ -38,11 +42,11 @@ app.get('/todos', function (req, res) {
 // 获取单个todo详情
 app.get('/todos/:id', function (req, res) {
   const { id } = req.params
-  if(!id){
-    return res.status(500).json({msg: 'invalid params'})
+  if (!id) {
+    return res.status(500).json({ msg: 'invalid params' })
   }
   const sql = `select * from tb_todo where id = ?`
-  connection.query(sql,id,(err,result) => {
+  connection.query(sql, id, (err, result) => {
     if (err) {
       return res.status(500).json({ msg: err })
     }
@@ -56,7 +60,7 @@ app.get('/todos/:id', function (req, res) {
 
 // 新增单个todo
 app.post('/todos', function (req, res) {
-  if(Object.values(req.body).filter(item => item!=='').length!==2){
+  if (Object.values(req.body).filter(item => item !== '').length !== 2) {
     return res.status(500).json({ msg: "invalid parameters" })
   }
   const sql = `insert into tb_todo set ?`
@@ -69,15 +73,15 @@ app.post('/todos', function (req, res) {
 })
 
 // 更新单个todo
-app.put( '/todos/:id', function (req, res) {
-  req.body = {...req.params, ...req.body}
-  if(Object.values(req.body).filter(item => item!=='').length === 1){
+app.put('/todos/:id', function (req, res) {
+  req.body = { ...req.params, ...req.body }
+  if (Object.values(req.body).filter(item => item !== '').length === 1) {
     return res.status(500).json({ msg: "invalid parameters" })
   }
   let sql = `update tb_todo set ? where id=?`
-  connection.query(sql, [req.body,req.body.id], (err, result) => {
+  connection.query(sql, [req.body, req.body.id], (err, result) => {
     if (err) {
-      return res.status(500).json({msg: err})
+      return res.status(500).json({ msg: err })
     }
 
     if (result.affectedRows === 0) {
@@ -91,20 +95,20 @@ app.put( '/todos/:id', function (req, res) {
 // 删除单个todo
 app.delete('/todos/:id', function (req, res) {
   const { id } = req.params
-  if(!id){
-    return res.status(500).json({msg: 'invalid params'})
+  if (!id) {
+    return res.status(500).json({ msg: 'invalid params' })
   }
   const sql = `delete from tb_todo where id = ?`
-  connection.query(sql, id, (err,result) => {
+  connection.query(sql, id, (err, result) => {
     if (err) {
-      res.status(500).send({msg: err})
+      res.status(500).send({ msg: err })
     } else {
       res.status(200).end('删除成功！')
     }
   })
 })
 
-const server = app.listen(80, 'localhost', function () {
+const server = app.listen(8088, 'localhost', function () {
   const host = server.address().address
   const port = server.address().port
   console.log("Running server at http://%s:%s", host, port)

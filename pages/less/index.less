@@ -1,184 +1,401 @@
-@TYLan: #66ccff;
+@TYL: #66ccff;
+@ALH: #EE0000;
 @max820: ~"(max-width: 820px)";
 
 #basicFlex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-size: 20px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: @TYL;
 }
 
 input {
-    border: none;
-    outline: none;
-    height: 30px;
-    color: @TYLan;
-    font-size: 20px;
-    font-weight: 700;
+  border: none;
+  outline: none;
+  color: @TYL;
+  font-size: 20px;
+  font-weight: 700;
+  width: 240px;
 }
 
 ul {
-    padding: 0;
-    list-style: none;
+  padding: 0;
+  list-style: none;
 }
 
 body {
-    color: @TYLan;
-    font-weight: 700;
-    background-color: #f1f0ed;
+  color: @TYL;
+  font-weight: 700;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #f1f0ed;
 }
 
 header {
-    #basicFlex();
-    justify-content: center;
-    height: 60px;
-    background-color: @TYLan;
-    box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
+  #basicFlex();
+  justify-content: center;
+  height: 60px;
+  background-color: @TYL;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
 
-    h2 {
-        font-size: 50px;
-        color: rgba(241, 240, 237, 0.7);
-        // 弄一个文字内阴影
-        text-shadow: 1px 3px 6px @TYLan, 0 0 0 #000, 1px 3px 6px @TYLan;
+  h2 {
+    a {
+      font-size: 50px;
+      color: rgba(241, 240, 237, 0.7);
+      text-shadow: 1px 3px 6px @TYL, 0 0 0 #000, 1px 3px 6px @TYL;
+      text-decoration: none;
     }
+  }
 }
 
 
 section {
-    width: 800px;
-    margin: 0 auto;
-    margin-top: 30px;
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 30px;
 
-    // 响应此时宽度适应
-    @media @max820 {
-        width: 100%;
-        padding: 0 10px;
+  // 响应此时宽度适应
+  @media @max820 {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  h2 {
+    opacity: 0;
+    margin: 20px 0;
+    font-size: 25px;
+    text-align: center;
+  }
+
+  li {
+    position: relative;
+    top: 0;
+    height: 50px;
+    overflow: hidden;
+    #basicFlex();
+    padding: 5px 45px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .4s;
+
+
+    &:hover {
+      top: -5px;
+      box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
     }
 
-    h2 {
-        opacity: 0;
-        margin: 20px 0;
-        font-size: 25px;
-        text-align: center;
+    // 左侧小边
+    &::before {
+      position: absolute;
+      left: 0;
+      top: -10%;
+      width: 5px;
+      height: 120%;
+      content: ' ';
+      background-color: #66ccff;
+
     }
 
+    // 增加点击范围
+    span,
+    label {
+      height: 100%;
+      line-height: 40px;
+    }
+
+    a {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      display: inline-block;
+      width: 10px;
+      height: 60px;
+      color: #fff;
+      text-decoration: none;
+      background-color: @ALH;
+      transition: all .5s;
+
+      &:hover {
+        width: 40px;
+      }
+
+      i {
+        position: absolute;
+        top: 22px;
+        left: 8px;
+      }
+
+      &::after {
+        position: absolute;
+        left: -15px;
+        top: 0px;
+        content: ' ';
+        width: 30px;
+        height: 60px;
+      }
+    }
+  }
+
+  .operation {
     li {
-        position: relative;
-        top: 0;
-        height: 50px;
-        overflow: hidden;
-        #basicFlex();
-        padding: 5px 65px 5px 45px;
+      opacity: 0;
+      padding: 5px 45px;
+      height: 100px;
+      padding-left: 60px;
+      cursor: auto;
+      flex-direction: column;
+      align-items: baseline;
+
+      >div {
         margin-bottom: 10px;
-        font-size: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all .4s;
+      }
 
-        &:hover {
-            top: -5px;
-            box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
+      &:hover {
+        top: 0;
+        box-shadow: none;
+      }
+
+      &::before {
+        content: none;
+      }
+
+      input {
+        border-bottom: 2px solid @TYL;
+      }
+
+      // 响应此时变列
+      @media @max820 {
+        height: 140px;
+        flex-direction: column;
+        align-items: baseline;
+      }
+
+      .insert {
+        position: relative;
+        width: 100%;
+        #basicFlex();
+
+        @media @max820 {
+          flex-direction: column;
+          align-items: baseline;
         }
 
-        // 左侧小边
+        i#i-add {
+          position: absolute;
+          font-size: 26px;
+          left: -43px;
+          top: 8px;
+        }
+      }
+
+      .find {
+        position: relative;
+        height: 40px;
+
+        i#i-find {
+          position: absolute;
+          font-size: 26px;
+          left: -43px;
+          top: 8px;
+        }
+
+        i#i-find-X {
+          visibility: hidden;
+          position: absolute;
+          color: #ccc;
+          top: 12px;
+          right: 3px;
+          transition: color .5s;
+
+          &:hover {
+            color: @TYL;
+          }
+        }
+      }
+    }
+  }
+
+  // 完成事件
+  .done {
+    ul {
+      color: #ccc;
+
+      li {
         &::before {
-            position: absolute;
-            left: 0;
-            top: -10%;
-            width: 5px;
-            height: 120%;
-            content: ' ';
-            background-color: #66ccff;
+          background-color: #ccc;
         }
 
-        // 增加点击范围
-        span,
-        label {
-            height: 100%;
-            line-height: 40px;
-        }
-
-        // 做一个a的小按钮
         a {
-            position: absolute;
-            top: 10px;
-            right: 5px;
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            font-weight: 700;
-            font-size: 14px;
-            color: #fff;
-            text-align: center;
-            line-height: 14px;
-            background: @TYLan;
-            border: 6px double #fff;
-            border-radius: 14px;
-            cursor: pointer;
+          background-color: #ccc;
         }
+      }
     }
-
-    .insert {
-        li {
-            opacity: 0;
-            padding: 5px 45px;
-
-            // 响应此时变列
-            @media @max820 {
-                height: 100px;
-                flex-direction: column;
-                align-items: baseline;
-            }
-
-            div {
-                #basicFlex();
-
-                input {
-                    width: 220px;
-                }
-            }
-        }
-    }
-
-    // 完成事件灰色
-    .done {
-        ul {
-            color: #ccc;
-
-            li {
-                &::before {
-                    background-color: #ccc;
-                }
-
-                a {
-                    background-color: #ccc;
-                }
-            }
-        }
-    }
+  }
 }
 
+// dialog
+.mb-base {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: auto;
+  max-width: 420px;
+  max-height: 320px;
+  overflow: hidden;
+  border-radius: 5px;
+  z-index: 1500;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-50%);
+
+  .mb-inner {
+    background-color: #fff;
+    position: relative;
+    margin: 0 auto;
+
+    .mb-header {
+      padding: 15px;
+      padding-top: 5px;
+      padding-right: 10px;
+      text-align: left;
+      font-size: 20px;
+      font-weight: 700;
+
+      .mb-title {
+        #basicFlex();
+
+        i {
+          color: #aaa;
+          transition: all .5s;
+
+          &:hover {
+            color: @TYL;
+          }
+        }
+      }
+    }
+
+    >div {
+      padding: 10px;
+    }
+
+    .mb-content {
+      padding-left: 20px;
+      padding-right: 20px;
+      font-size: 15px;
+      color: @ALH;
+    }
+
+    .mb-bns {
+      display: flex;
+      justify-content: end;
+      margin: 0 auto;
+
+      a {
+        position: relative;
+        display: inline-block;
+        padding: 8px 15px 5px 15px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 14px;
+        transition: all .25s;
+
+        &::before {
+          content: ' ';
+          position: absolute;
+          bottom: 0;
+          left: 10px;
+          width: 0px;
+          height: 4px;
+          background-color: @TYL;
+          transition: all .5s;
+        }
+
+        &:hover {
+          &::before {
+            width: 38px;
+          }
+        }
+      }
+
+      .mb-confirm {
+        color: @ALH;
+
+        &::before {
+          background-color: @ALH;
+        }
+      }
+    }
+  }
+}
+
+.mb-delete {
+  .mb-inner {
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.4s;
+  }
+}
+
+.mb-show {
+  visibility: visible;
+
+  ~.mb-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &.mb-delete {
+    .mb-inner {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+.mb-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  transition: all .3s;
+}
+
+
 @keyframes animMoveDown {
-    from {
-        top: -50px;
-    }
+  from {
+    top: -50px;
+  }
 
-    to {
-        top: 0;
-    }
+  to {
+    top: 0;
+  }
 
-    0% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }
