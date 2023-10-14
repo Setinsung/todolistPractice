@@ -6,8 +6,7 @@ Web前端开发技术课程期末作业
 
 ## 1.使用技术
 
-- webpack打包的要求去除
-- 别的有些也没有实现
+- Vanilla JS + JQuery + EJS
 
 ## 2.主要操作
 

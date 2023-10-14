@@ -4,9 +4,7 @@
 
 ## 1.使用技术
 
-- 后端使用Node.js+Express实现了几个简单的CRUD的api
-
-- 前端使用了jQuery和axios，以及less语法方便写css
+- MySQL + Express + JQuery + Axios + Less
 
 ## 2.实现效果
 
